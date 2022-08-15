@@ -24,9 +24,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-//vid: 'ca-app-pub-3940256099942544/1044960115'
-//img: 'ca-app-pub-3940256099942544/2247696110',
-//main 'ca-app-pub-8870324520746610/8926754633',
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 

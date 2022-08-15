@@ -28,7 +28,7 @@ class _FullScreenNativeAdScreenState extends State<FullScreenNativeAdScreen> {
         elevation: 0,
       ),
       body: GetNativeAdWidget(
-        adUnitId: 'ca-app-pub-8870324520746610/8926754633',
+        adUnitId: 'ca-app-pub-3940256099942544/2247696110',
         customOptions: NativeAdCustomOptions.defaultConfig().toMap,
       ),
     );
