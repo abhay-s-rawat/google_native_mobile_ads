@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:google_native_mobile_ads/google_native_mobile_ads.dart';
-
+import 'package:preload_page_view/preload_page_view.dart';
 import 'get_ad_widget.dart';
 
 class FullScreenNativeAdScreen extends StatefulWidget {
@@ -13,6 +13,26 @@ class FullScreenNativeAdScreen extends StatefulWidget {
 }
 
 class _FullScreenNativeAdScreenState extends State<FullScreenNativeAdScreen> {
+  List<Widget> adsList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _initialize();
+    });
+  }
+
+  _initialize() {
+    for (var i = 0; i < 10; i++) {
+      adsList.add(GetNativeAdWidget(
+        adUnitId: 'ca-app-pub-3940256099942544/2247696110',
+        customOptions: NativeAdCustomOptions.defaultConfig().toMap,
+      ));
+    }
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,9 +47,18 @@ class _FullScreenNativeAdScreenState extends State<FullScreenNativeAdScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: GetNativeAdWidget(
+/*       body: GetNativeAdWidget(
         adUnitId: 'ca-app-pub-3940256099942544/2247696110',
         customOptions: NativeAdCustomOptions.defaultConfig().toMap,
+      ), */
+      body: PreloadPageView.builder(
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: Axis.vertical,
+        preloadPagesCount: 2,
+        itemCount: adsList.length,
+        itemBuilder: (context, index) {
+          return adsList.elementAt(index);
+        },
       ),
     );
   }
