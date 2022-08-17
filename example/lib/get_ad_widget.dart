@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:google_native_mobile_ads/google_native_mobile_ads.dart';
 
@@ -54,7 +55,7 @@ class _GetNativeAdWidgetState extends State<GetNativeAdWidget> {
       /// This needs not to be changed
       factoryId: NativeAdConfig.adFactoryId,
       listener: NativeAdListener(
-        onAdLoaded: (Ad ad) {
+        onAdLoaded: (Ad ad) async {
           print('$NativeAd loaded.');
           if (mounted) {
             setState(() {
@@ -92,11 +93,12 @@ class _GetNativeAdWidgetState extends State<GetNativeAdWidget> {
     if (nativeAdIsLoaded) {
       return AdWidget(ad: nativeAd!);
     }
-    return const Center(
-        child: Text(
-      'loading ad',
-      style: TextStyle(color: Colors.white),
-    ));
+    return Center(
+      child: SpinKitFadingCube(
+        color: Theme.of(context).primaryColor,
+        size: 30,
+      ),
+    );
   }
 
   @override

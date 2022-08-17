@@ -27,7 +27,8 @@ class _FullScreenNativeAdScreenState extends State<FullScreenNativeAdScreen> {
     for (var i = 0; i < 10; i++) {
       adsList.add(GetNativeAdWidget(
         adUnitId: 'ca-app-pub-3940256099942544/2247696110',
-        customOptions: NativeAdCustomOptions.defaultConfig().toMap,
+        customOptions:
+            NativeAdCustomOptions.defaultConfig(NativeAdSize.fullScreen).toMap,
       ));
     }
     setState(() {});

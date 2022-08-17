@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -21,7 +22,10 @@ import com.google.android.gms.ads.nativead.NativeAdView;
 import io.flutter.plugins.googlemobileads.GoogleMobileAdsPlugin.NativeAdFactory;
 
 import java.util.Map;
-
+enum NativeAdSize {
+    fullScreen,
+    inline
+}
 public class NativeAdFactoryImplementation implements NativeAdFactory {
     private final LayoutInflater layoutInflater;
 
@@ -35,15 +39,34 @@ public class NativeAdFactoryImplementation implements NativeAdFactory {
     @Override
     public NativeAdView createNativeAd(NativeAd nativeAd, Map<String, Object> customOptions) {
         String adType = (String) customOptions.get("nativeAdSize");
-        final NativeAdView adView = (NativeAdView) layoutInflater.inflate(R.layout.full_screen_native_ad_layout, null);
-
+        final NativeAdSize nativeAdSize;
+        final NativeAdView adView;
+                switch(adType) {
+            case "inline":
+                nativeAdSize = NativeAdSize.inline;
+                adView = (NativeAdView) layoutInflater.inflate(R.layout.inline_native_ad, null);
+                break;
+            default:
+                nativeAdSize = NativeAdSize.fullScreen;
+                adView = (NativeAdView) layoutInflater.inflate(R.layout.full_screen_native_ad_layout, null);
+                break;
+        }
+        Map<String, Object> adLayoutConfig = (Map<String, Object>) customOptions.get("adLayoutConfig");
         int backgroundColor = Color.parseColor((String) (customOptions.get("backgroundColor")));
         adView.setBackgroundColor(backgroundColor);
         // Media
         MediaView mediaView = (MediaView) adView.findViewById(R.id.ad_media_stack);
         adView.setMediaView(mediaView);
-        if (nativeAd.getMediaContent() != null) {
+        Map<String, Object> adMediaConfig = (Map<String, Object>) customOptions.get("adMediaConfig");
+        boolean hideAdMediaConfig = (nativeAd.getMediaContent() == null) || ((boolean) (adMediaConfig.get("visible")) == false);
+        if (!hideAdMediaConfig) {
+            mediaView.setVisibility(View.VISIBLE);
             adView.getMediaView().setMediaContent(nativeAd.getMediaContent());
+            if(nativeAdSize == NativeAdSize.inline) {
+                mediaView.getLayoutParams().height = dpToPx((int) adLayoutConfig.get("mediaContentHeight"), mediaView.getContext());
+            }
+        } else {
+            mediaView.setVisibility(View.GONE);
         }
         // Headline
         adView.setHeadlineView(adView.findViewById(R.id.ad_headline));
@@ -122,6 +145,7 @@ public class NativeAdFactoryImplementation implements NativeAdFactory {
             action.setTextSize((int) (adActionButtonConfig.get("fontSize")));
         }
         ConstraintLayout actionLayout = (ConstraintLayout) (adView.findViewById(R.id.ad_call_to_action_container));
+        actionLayout.getLayoutParams().height = dpToPx((int) adLayoutConfig.get("adActionHeight"), actionLayout.getContext());
         actionLayout.setBackgroundColor(buttonColor);
         // Profile Icon
         adView.setIconView(adView.findViewById(R.id.ad_app_icon));
@@ -136,6 +160,9 @@ public class NativeAdFactoryImplementation implements NativeAdFactory {
             icon.getLayoutParams().width = dpToPx((int) (adIconConfig.get("width")), icon.getContext());
             icon.setVisibility(View.VISIBLE);
         }
+        // Profile Container Height
+        LinearLayout native_ad_tile_container = (LinearLayout) (adView.findViewById(R.id.native_ad_tile_container));
+        native_ad_tile_container.getLayoutParams().height = dpToPx((int) adLayoutConfig.get("adTileHeight"), native_ad_tile_container.getContext());
         // Stars
         adView.setStarRatingView(adView.findViewById(R.id.ad_stars));
         Map<String, Object> adStarsConfig = (Map<String, Object>) customOptions.get("adStarsConfig");
@@ -154,12 +181,11 @@ public class NativeAdFactoryImplementation implements NativeAdFactory {
             rating.setVisibility(View.VISIBLE);
         }
         if (hideAdStoreConfig && hideAdPriceConfig) {
-            ConstraintLayout ad_store_details_container = (ConstraintLayout) (adView.findViewById(R.id.ad_store_details_container));
+            LinearLayout ad_store_details_container = (LinearLayout) (adView.findViewById(R.id.ad_store_details_container));
             ad_store_details_container.setVisibility(View.GONE);
         }
         if (hideAdActionButtonConfig && hideAdBodyConfig) {
-            ConstraintLayout actionLayoutContainer = (ConstraintLayout) (adView.findViewById(R.id.ad_call_to_action_container));
-            actionLayoutContainer.setVisibility(View.GONE);
+            actionLayout.setVisibility(View.GONE);
         }
         adView.setNativeAd(nativeAd);
         return adView;

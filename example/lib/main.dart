@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'full_screen_ad.dart';
+import 'medium_ad_ad.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,6 +43,17 @@ class _MainScreenState extends State<MainScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            ElevatedButton(
+              child: const Text('Show inline native ad'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const MediumSizeNativeAdScreen(),
+                  ),
+                );
+              },
+            ),
             ElevatedButton(
               child: const Text('Show Full screen native ad'),
               onPressed: () {

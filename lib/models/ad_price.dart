@@ -8,7 +8,7 @@ class AdPriceConfig {
 
   AdPriceConfig({
     this.visible = true,
-    this.fontSize = 12,
+    this.fontSize = 11,
     this.textColor = '#FFFFFF',
   });
 

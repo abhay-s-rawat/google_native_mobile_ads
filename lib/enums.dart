@@ -1,0 +1,4 @@
+enum NativeAdSize {
+  fullScreen,
+  inline,
+}

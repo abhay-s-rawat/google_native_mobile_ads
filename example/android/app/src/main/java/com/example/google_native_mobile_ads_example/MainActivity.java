@@ -11,11 +11,11 @@ public class MainActivity extends FlutterActivity {
     public void configureFlutterEngine(FlutterEngine flutterEngine) {
         super.configureFlutterEngine(flutterEngine);
         final GoogleMobileAdsPlugin.NativeAdFactory factory = new NativeAdFactoryImplementation(getLayoutInflater());
-        GoogleMobileAdsPlugin.registerNativeAdFactory(flutterEngine, "fullScreenNativeAdFactory", factory);
+        GoogleMobileAdsPlugin.registerNativeAdFactory(flutterEngine, "google_native_mobile_ads_AdFactory", factory);
     }
 
     @Override
     public void cleanUpFlutterEngine(FlutterEngine flutterEngine) {
-        GoogleMobileAdsPlugin.unregisterNativeAdFactory(flutterEngine, "fullScreenNativeAdFactory");
+        GoogleMobileAdsPlugin.unregisterNativeAdFactory(flutterEngine, "google_native_mobile_ads_AdFactory");
     }
 }

@@ -2,9 +2,10 @@
 <a href="https://www.buymeacoffee.com/abhayrawat" target="_blank"><img align="center" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="30px" width= "108px"></a>
 </p> 
 
-# Full screen native ad
+# Full screen/Inline native ads
 
-This only supports fullscreen native ads on android.
+This package supports fullscreen and inline native ads on android. (No access to xcode as of now).
+Please visit example for how to use.
 
 Liked my work ? [support me](https://www.buymeacoffee.com/abhayrawat)
 
@@ -23,12 +24,12 @@ public class MainActivity extends FlutterActivity {
     public void configureFlutterEngine(FlutterEngine flutterEngine) {
         super.configureFlutterEngine(flutterEngine);
         final GoogleMobileAdsPlugin.NativeAdFactory factory = new NativeAdFactoryImplementation(getLayoutInflater()); // reference to this package created factory
-        GoogleMobileAdsPlugin.registerNativeAdFactory(flutterEngine, "fullScreenNativeAdFactory", factory);
+        GoogleMobileAdsPlugin.registerNativeAdFactory(flutterEngine, "google_native_mobile_ads_AdFactory", factory);
     }
 
     @Override
     public void cleanUpFlutterEngine(FlutterEngine flutterEngine) {
-        GoogleMobileAdsPlugin.unregisterNativeAdFactory(flutterEngine, "fullScreenNativeAdFactory");
+        GoogleMobileAdsPlugin.unregisterNativeAdFactory(flutterEngine, "google_native_mobile_ads_AdFactory");
     }
 }
 ```
@@ -68,3 +69,5 @@ for full example please view example/main.dart
 ```
 ## Screenshots
 ![](https://github.com/abhay-s-rawat/google_native_mobile_ads/blob/main/example/screenshots/native_full_screen.png) ![](https://github.com/abhay-s-rawat/google_native_mobile_ads/blob/main/example/screenshots/native_full_screen2.png)
+![](https://github.com/abhay-s-rawat/google_native_mobile_ads/blob/main/example/screenshots/inline_1.png)
+![](https://github.com/abhay-s-rawat/google_native_mobile_ads/blob/main/example/screenshots/inline_2.png)
