@@ -48,10 +48,6 @@ class _FullScreenNativeAdScreenState extends State<FullScreenNativeAdScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-/*       body: GetNativeAdWidget(
-        adUnitId: 'ca-app-pub-3940256099942544/2247696110',
-        customOptions: NativeAdCustomOptions.defaultConfig().toMap,
-      ), */
       body: PreloadPageView.builder(
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
