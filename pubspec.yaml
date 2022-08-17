@@ -1,6 +1,6 @@
 name: google_native_mobile_ads
 description: Display Full screen native ads.
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/abhay-s-rawat/google_native_mobile_ads
 
 environment:

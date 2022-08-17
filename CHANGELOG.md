@@ -9,3 +9,7 @@
 ## 1.0.0
 
 * Added inline native ads.
+
+## 1.0.1
+
+* Typo error fix in example.

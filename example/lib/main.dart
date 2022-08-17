@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'full_screen_ad.dart';
-import 'medium_ad_ad.dart';
+import 'inline_ad.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
