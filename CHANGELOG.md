@@ -17,3 +17,7 @@
 ## 1.0.2
 
 * No changes in code just added proper description.
+
+## 1.0.3
+
+* Minor adjustments.

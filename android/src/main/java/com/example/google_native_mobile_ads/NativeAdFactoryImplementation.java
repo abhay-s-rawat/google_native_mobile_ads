@@ -158,7 +158,6 @@ public class NativeAdFactoryImplementation implements NativeAdFactory {
             icon.setImageDrawable(nativeAd.getIcon().getDrawable());
             icon.getLayoutParams().height = dpToPx((int) (adIconConfig.get("height")), icon.getContext());
             icon.getLayoutParams().width = dpToPx((int) (adIconConfig.get("width")), icon.getContext());
-            icon.gra
             icon.setVisibility(View.VISIBLE);
         }
         // Profile Container Height

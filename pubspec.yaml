@@ -1,6 +1,6 @@
 name: google_native_mobile_ads
 description: This package helps in displaying native ads , it supports creating full screen and inline native ads with very minimal code required from android side.
-version: 1.0.2
+version: 1.0.3
 homepage: https://github.com/abhay-s-rawat/google_native_mobile_ads
 
 environment:
