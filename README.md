@@ -70,5 +70,5 @@ for full example please view example/main.dart
 ## Screenshots
 ![](https://github.com/abhay-s-rawat/google_native_mobile_ads/blob/main/example/screenshots/native_full_screen.png)
 ![](https://github.com/abhay-s-rawat/google_native_mobile_ads/blob/main/example/screenshots/native_full_screen2.png)
-![](https://github.com/abhay-s-rawat/google_native_mobile_ads/blob/main/example/screenshots/inline_1.png)
 ![](https://github.com/abhay-s-rawat/google_native_mobile_ads/blob/main/example/screenshots/inline_2.png)
+![](https://github.com/abhay-s-rawat/google_native_mobile_ads/blob/main/example/screenshots/inline_1.png)
